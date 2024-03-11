@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--ex 1
+<p id="text"></p>
+<script>
+    let text=prompt("Please enter a text")
+    document.getElementById("text").innerHTML =  text
+</script>-->
+<!--ex 2
+<p id="result"></p>
+<script>
+    let a=prompt("enter the value of a")
+    a = parseInt(a)
+    let b=prompt("enter the value of b")
+    b = parseInt(b)
+    let result= a+b
+    document.getElementById("result").innerHTML =  result
+</script>-->
+
+<!--ex 3
+<p id="payement"></p>
+<script>
+    let budget=200
+    let achats=500
+    if (budget < achats) {
+        document.getElementById("payement").innerHTML =  "budget insuffisant"
+        }
+    else {
+        document.getElementById("payement").innerHTML =  "budget suffisant"
+        }
+</script>-->
+<!--ex 4
+
+<script>
+    let HT=prompt("Entrez le prix HT")
+    HT = parseInt(HT)
+    let TVA=0.2
+    let TTC =HT*TVA+HT
+    document.body.innerText = "Le TTC est de valeur : "+TTC.toFixed(2)
+</script>-->
+<!--ex 5 
+<script>
+    let prixHT;
+    do {
+        prixHT = prompt("Entrez le prix HT :");
+        // Vérifier si l'utilisateur a cliqué sur Annuler
+        if (prixHT === null) {
+            alert("Opération annulée.");
+            document.body.innerText ="Opération annulée."
+            break;
+        }
+        prixHT = parseFloat(prixHT); 
+        if (isNaN(prixHT) || prixHT <= 0) {
+            alert("Veuillez entrer un prix HT valide et positif.");
+            document.body.innerText ="Veuillez entrer un prix HT valide et positif."
+        }
+    } while (isNaN(prixHT) || prixHT <= 0)
+
+    // Si l'utilisateur n'a pas annulé, demander le taux de TVA
+    if (prixHT !== null) {
+        let tauxTVA
+        do {
+            tauxTVA = prompt("Entrez le taux de TVA en pourcentage :")
+            // Vérifier si l'utilisateur a cliqué sur Annuler
+            if (tauxTVA === null) {
+                alert("Opération annulée.")
+                document.body.innerText ="Opération annulée."
+                break;
+            }
+            tauxTVA = parseFloat(tauxTVA) 
+            if (isNaN(tauxTVA) || tauxTVA < 0) {
+                alert("Veuillez entrer un taux de TVA valide (positif ou nul).")
+                document.body.innerText ="Veuillez entrer un taux de TVA valide (positif ou nul)."
+            }
+        } while (isNaN(tauxTVA) || tauxTVA < 0)
+
+        // Si l'utilisateur n'a pas annulé, calculer le prix TTC
+        if (tauxTVA !== null) {
+            let prixTTC = prixHT * (1 + tauxTVA / 100)
+            document.body.innerText = "Le prix TTC est : " + prixTTC.toFixed(2)
+        }
+    }
+</script>-->
+<!--ex 6
+<script>
+    let prixHT;
+    do {
+        prixHT = prompt("Entrez le prix HT :");
+        // Vérifier si l'utilisateur a cliqué sur Annuler
+        if (prixHT === null) {
+            alert("Opération annulée.");
+            document.body.innerText ="Opération annulée."
+            break;
+        }
+        prixHT = parseFloat(prixHT); 
+        if (isNaN(prixHT) || prixHT <= 0) {
+            alert("Veuillez entrer un prix HT valide et positif.");
+            document.body.innerText ="Veuillez entrer un prix HT valide et positif."
+        }
+    } while (isNaN(prixHT) || prixHT <= 0)
+
+    // Si l'utilisateur n'a pas annulé, demander le taux de TVA
+    if (prixHT !== null) {
+        let tauxTVA
+        do {
+            tauxTVA = prompt("Entrez le taux de TVA en pourcentage :")
+            // Vérifier si l'utilisateur a cliqué sur Annuler
+            if (tauxTVA === null) {
+                alert("Opération annulée.")
+                document.body.innerText ="Opération annulée."
+                break;
+            }
+            tauxTVA = parseFloat(tauxTVA) 
+            if (isNaN(tauxTVA) || tauxTVA < 0) {
+                alert("Veuillez entrer un taux de TVA valide (positif ou nul).")
+                document.body.innerText ="Veuillez entrer un taux de TVA valide (positif ou nul)."
+            }
+        } while (isNaN(tauxTVA) || tauxTVA < 0)
+
+        // Si l'utilisateur n'a pas annulé, calculer le prix TTC
+        if (tauxTVA !== null) {
+            let prixTTC = prixHT * (1 + tauxTVA / 100)
+            if(prixTTC>100){
+            document.body.style.color= "red"
+            document.body.innerText = "Le prix TTC est : " + prixTTC.toFixed(2)
+        }
+            else{
+                document.body.style.color= "green"
+                document.body.innerText = "Le prix TTC est : " + prixTTC.toFixed(2)  
+            }}
+    }
+</script>
+ -->
+ <!-- ex7 
+ <h1>Mes <span>cocktails préférés</span></h1>
+<p>Mojito</p>
+<p>Gin Fizz</p>
+<p>Bloody mary<p>
+<p>Long Island Iced Tea</p>
+<p>Mais si je ne devais qu'en retenir qu'un : <strong id="cocktail">
+</strong></p>
+<script>
+    document.getElementById("cocktail").innerHTML =  "Long Island Iced Tea"
+</script>-->
+<!-- ex8 
+<script>
+    
+var tbl = document.createElement("table")
+tbl.style.border = "1px solid"
+let x=3
+let y=4
+for(var i=0;i<x;i++){
+    var row=document.createElement("tr")
+    row.style.border = "1px solid"
+    for(var j=0;j<y;j++){
+        var cell = document.createElement("td")
+        cell.style.border = "1px solid"
+        var cellText = document.createTextNode("cell in row " + i + ", column " + j)
+        cell.appendChild(cellText)
+        row.appendChild(cell)
+}
+tbl.appendChild(row)
+}
+document.body.appendChild(tbl)
+   
+</script>-->
+<!-- ex9 
+<script>
+    
+var tbl = document.createElement("table")
+tbl.style.border = "1px solid"
+let x=prompt("enter the number of rows X")
+x=parseInt(x)
+let y=prompt("enter the number of columns Y")
+y=parseInt(y)
+for(var i=0;i<x;i++){
+    var row=document.createElement("tr")
+    row.style.border = "1px solid"
+    for(var j=0;j<y;j++){
+        var cell = document.createElement("td")
+        cell.style.border = "1px solid"
+        var cellText = document.createTextNode("cell in row " + i + ", column " + j)
+        cell.appendChild(cellText)
+        row.appendChild(cell)
+}
+tbl.appendChild(row)
+}
+document.body.appendChild(tbl)
+   
+</script>-->
+<!-- ex10 
+<script>
+    document.write(`<ul>`)
+    for(var i=0;i<10;i++){
+        document.write(`<li>${Math.floor(Math.random() * 100)}</li>`)
+    }
+    document.write(`</ul>`)
+</script>
+-->
+<!-- ex11 
+<script>
+     document.body.innerHTML="bla bla"
+    document.body.style.background=`rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+</script>--> 
+<!-- ex12 -->
+<script>
+    var imagejavascript = document.createElement("img");
+    imagejavascript.src = `https://picsum.photos/id/${Math.floor(Math.random() * 255)}/350/350`;
+    document.body.appendChild(imagejavascript)
+</script> 
+</body>
+</html>
