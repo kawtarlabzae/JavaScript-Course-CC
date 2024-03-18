@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<input type="text" id="firstCase" name="one" placeholder="Saisir le premier nombre">
+<input type="text" id="secondCase" name="two" placeholder="Saisir le deuxieme nombre">
+<select id="operation" title="operations">
+    <option value="" selected>Choisissez une opération</option>
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">x</option>
+    <option value="/">/</option>
+  </select>
+  <span id="result"></span>
+    <button>Calculer</button>
+
+
+<script>
+    const btn = document.querySelector('button')
+    btn.addEventListener('click', Calculer)
+
+    function Calculer(){
+        let a= parseFloat(document.getElementById("firstCase").value)
+        let b= parseFloat(document.getElementById("secondCase").value)
+        const operation =  document.querySelector('select').value
+        if (operation === "") {
+      document.getElementById("result").innerHTML = "Veuillez choisir une opération.";
+      return; 
+    }
+        if (operation==="+"){
+            document.getElementById("result").innerHTML=a+b
+        }
+        if (operation==="-"){
+            document.getElementById("result").innerHTML=a-b
+        }
+        if (operation==="*"){
+            document.getElementById("result").innerHTML=a*b
+        }
+        if (operation==="/"){
+            document.getElementById("result").innerHTML=a/b
+        }
+    }
+</script>
+</body>
+</html>

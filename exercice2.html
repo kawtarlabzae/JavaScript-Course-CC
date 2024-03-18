@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display:flex
+        }
+        
+    </style>
+</head>
+<body>
+<input type="text" id="firstCase" name="one">
+
+<input type="text" id="secondCase" name="two">
+
+<button id="Permuter">Permuter</button>
+
+<script>
+    document.getElementById("Permuter").addEventListener("click", Permuter)
+    function Permuter(){
+        document.getElementById("firstCase").style.order=2
+        document.getElementById("secondCase").style.order=1
+        document.getElementById("Permuter").style.order=3
+        }
+</script>
+</body>
+</html>

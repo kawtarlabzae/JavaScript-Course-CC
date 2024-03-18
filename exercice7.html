@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empêcher la redirection</title>
+</head>
+<body>
+  <p>Cliquez sur le lien pour une redirection interdite:</p>
+  <a href="https://www.w3schools.com/tags/tag_select.asp" id="lien">Lien </a> <br> <br>
+  <div id="menu-trigger">Cliquez ici pour afficher le menu</div>
+ 
+<div id="menu">
+    <ul>
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+    </ul>
+</div>
+  <script>
+    const lien = document.getElementById('lien');
+
+    lien.addEventListener('click', (event) => {
+      event.preventDefault();
+      alert("Redirection interdite!");
+    });
+
+    const menu = document.getElementById('menu-trigger'); 
+
+    menu.addEventListener("click", Afficher);
+    function Afficher() {
+        document.getElementById('menu').style.display = "block";
+    }
+
+    menu.addEventListener("mouseout", function() {
+        document.getElementById('menu').style.display = "none";
+    });
+  </script>
+</body>
+</html>
