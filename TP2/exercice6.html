@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="first">email:</label>
+    <input type="email" id="first" name="one" >
+    <br>
+    <br>
+    <label for="second">objet:</label>
+    <input type="text" id="second" name="two" >
+    <br>
+    <br>
+    <label for="third">corps:</label>
+    <textarea id="third"  rows="4" cols="50"></textarea>
+    <br>
+    <br>
+    <button id="email">Envoyer l'email</button>
+    <br>
+    <br>
+    <p id="demo"></p>
+    <script>
+        btn=document.querySelector('button')
+        btn.addEventListener('click', Afficher)
+        function Afficher(){
+            document.getElementById('demo').innerHTML="Sender : "+
+            document.getElementById('first').value+
+            `<br>`+'Object : '+document.getElementById('second').value+`<br>`+
+            "Corps de l'email : "+document.getElementById('third').value
+        }
+    </script>
+</body>
+
+</html>

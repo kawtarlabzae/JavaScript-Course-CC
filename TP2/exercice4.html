@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p id="demo"></p>
+  <script>
+  function isnum(order) {
+      let a;
+      do { 
+          a = prompt(`enter the ${order} value`);
+          if (a === null) {
+              return null; 
+          }
+          a=parseFloat(a)
+      } while (isNaN(a));
+      return a;
+  }
+
+  let list = []; 
+  for (let i = 0; i < 3; i++) { 
+      let value = isnum(i+1); 
+      if (value !== null) {
+          list.push(value);
+      } else {
+          break; 
+      }
+  }
+
+  if (list.length === 3) {
+      let equalCount = 0;
+      for (let i = 0; i < list.length - 1; i++) {
+          for (let j = i + 1; j < list.length; j++) {
+              if (list[i] == list[j]) {
+                  equalCount++;
+              }
+          }
+      }
+
+      if (equalCount === 0) {
+          document.getElementById('demo').innerHTML = "Les trois variables sont différentes.";
+      } else if (equalCount === list.length - 1) {
+          document.getElementById('demo').innerHTML = "Les trois variables sont identiques";
+      } else {
+          document.getElementById('demo').innerHTML = "Deux des variables sont de valeurs égales.";
+      }
+  }
+  </script>
+</body>
+</html>

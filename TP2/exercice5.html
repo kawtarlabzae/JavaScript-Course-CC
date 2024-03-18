@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let prixHT;
+        do {
+            prixHT = prompt("Entrez le prix HT :");
+          
+            if (prixHT === null) {
+                alert("Opération annulée.");
+                document.body.innerText ="Opération annulée."
+                break;
+            }
+            prixHT = parseFloat(prixHT); 
+            if (isNaN(prixHT) || prixHT <= 0) {
+                alert("Veuillez entrer un prix HT valide et positif.");
+                document.body.innerText ="Veuillez entrer un prix HT valide et positif."
+            }
+        } while (isNaN(prixHT) || prixHT <= 0)
+    
+       
+        if (prixHT !== null) {
+            let tauxTVA
+            do {
+                tauxTVA = prompt("Entrez le taux de TVA en pourcentage :")
+                
+                if (tauxTVA === null) {
+                    alert("Opération annulée.")
+                    document.body.innerText ="Opération annulée."
+                    break;
+                }
+                tauxTVA = parseFloat(tauxTVA) 
+                if (isNaN(tauxTVA) || tauxTVA < 0) {
+                    alert("Veuillez entrer un taux de TVA valide (positif ou nul).")
+                    document.body.innerText ="Veuillez entrer un taux de TVA valide (positif ou nul)."
+                }
+            } while (isNaN(tauxTVA) || tauxTVA < 0)
+    
+            
+            if (tauxTVA !== null) {
+                let prixTTC = prixHT * (1 + tauxTVA / 100)
+                document.body.innerText = "Le prix TTC est : " + prixTTC.toFixed(2)
+            }
+        }
+    </script>
+</body>
+</html>
