@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trivia Quiz</title>
+  <style>
+    
+   
+      body {
+        margin-left: 30%;
+        max-width:450px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  color: #555;
+}
+
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.question {
+  margin-bottom: 30px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.question p {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
+
+.choices label {
+  display: block;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #555;
+}
+
+.choices input[type="radio"] {
+  vertical-align: middle;
+}
+
+#score-container {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #555;
+  font-size: 20px;
+}
+
+  </style>
+</head>
+
+<body>
+  <h1>Quiz</h1>
+  <form id="trivia-form">
+    <div class="form-group">
+      <label for="trivia_amount">Number of Questions:</label>
+      <input type="number" id="trivia_amount" name="trivia_amount" min="1" required>
+    </div>
+    <div class="form-group">
+      <label for="trivia_category">Select Category:</label>
+      <select name="trivia_category" id="trivia_category" class="form-control">
+        <option value="any">Any Category</option>
+        <option value="9">General Knowledge</option>
+        <option value="10">Entertainment: Books</option>
+        <option value="11">Entertainment: Film</option>
+        <option value="12">Entertainment: Music</option>
+        <option value="17">Science & Nature</option>
+        <option value="18">Science: Computers</option>
+        <option value="19">Science: Mathematics</option>
+        <option value="22">Geography</option>
+        <option value="23">History</option>
+        <option value="27">Animals</option>
+        <option value="21">Sports</option>
+        <option value="26">Celebrities</option>
+        <option value="25">Art</option>
+        <option value="15">Entertainment: Video Games</option>
+        <option value="31">Japanese Anime & Manga</option>
+        <option value="32">Cartoon & Animations</option>
+        <option value="29">Comics</option>
+        <option value="16">Entertainment: Board Games</option>
+        <option value="28">Vehicles</option>
+        <option value="24">Politics</option>
+        <option value="20">Mythology</option>
+        <option value="13">Entertainment: Musicals & Theatres</option>
+        <option value="14">Entertainment: Television</option>
+        <option value="30">Gadgets</option>
+
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="trivia_difficulty">Select Difficulty:</label>
+      <select name="trivia_difficulty" id="trivia_difficulty" class="form-control">
+        <option value="any">Any Difficulty</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+    <button type="submit" id="start-button">Start Quiz</button>
+  </form>
+
+  <div id="question-container"></div>
+  <div id="score-container"></div>
+
+  <script>
+    const form = document.getElementById('trivia-form');
+const startButton = document.getElementById('start-button');
+const questionContainer = document.getElementById('question-container');
+const scoreContainer = document.getElementById('score-container');
+
+let score = 0;
+
+startButton.addEventListener('click', (event) => {
+  event.preventDefault(); 
+
+  const number = parseInt(document.getElementById("trivia_amount").value);
+  const categ = document.getElementById("trivia_category").value;
+  const diff = document.getElementById("trivia_difficulty").value;
+
+  let link = `https://opentdb.com/api.php?amount=${number}&${categ !== "any" ? `category=${categ}` : ""}&${diff !== "any" ? `difficulty=${diff}` : ""}&type=multiple`;
+
+  fetch(link)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      displayQuestions(data.results); 
+    })
+    .catch(error => {
+      console.error('There was a problem with your fetch operation:', error);
+  
+    });
+});
+
+function displayQuestions(questions) {
+  questionContainer.innerHTML = ''; 
+
+  questions.forEach(question => {
+    const questionElement = document.createElement('div');
+    questionElement.classList.add('question');
+
+    const questionText = document.createElement('p');
+    questionText.textContent = question.question;
+
+    const choices = document.createElement('div');
+    choices.classList.add('choices');
+
+  
+    question.incorrect_answers.forEach((answer, index) => {
+      const choiceElement = document.createElement('div');
+      const radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = `question-${question.question}`; 
+      radio.value = index; 
+
+      const label = document.createElement('label');
+      label.textContent = answer;
+
+      choiceElement.appendChild(radio);
+      choiceElement.appendChild(label);
+
+      choices.appendChild(choiceElement);
+    });
+
+    const correctAnswerIndex = Math.floor(Math.random() * (question.incorrect_answers.length + 1));
+    const correctAnswer = document.createElement('input');
+    correctAnswer.type = 'hidden'; 
+    correctAnswer.value = correctAnswerIndex; 
+
+    questionElement.appendChild(questionText);
+    questionElement.appendChild(choices);
+    questionElement.appendChild(correctAnswer); 
+
+    questionContainer.appendChild(questionElement);
+  });
+
+
+  const submitButton = document.createElement('button');
+  submitButton.textContent = 'Submit Answers';
+  submitButton.addEventListener('click', checkAnswers);
+  questionContainer.appendChild(submitButton);
+}
+
+function checkAnswers() {
+  score = 0; 
+
+  const questions = questionContainer.querySelectorAll('.question');
+  questions.forEach(question => {
+    const selectedRadio = question.querySelector('input[type="radio"]:checked');
+    const correctAnswerIndex = question.querySelector('input[type="hidden"]').value;
+
+    if (selectedRadio && parseInt(selectedRadio.value) === parseInt(correctAnswerIndex)) {
+      score++;
+    }
+  });
+
+  scoreContainer.textContent = `Your Score: ${score}`;
+}
+</script>
+</body>
+
+</html>

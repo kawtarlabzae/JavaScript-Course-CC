@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Superhero Quiz</title>
+  
+  <style>
+   
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .result-box {
+      background-color: #fff;
+      border: 1px solid #6c757d;
+      border-radius: 5px;
+      margin-top: 20px;
+      padding: 20px;
+    }
+
+    .result-box p {
+      font-size: 18px;
+    }
+
+    .result-box span {
+      font-weight: bold;
+      color: #dc3545; 
+    }
+
+    .question-section {
+      background-color: #fff;
+      border: 1px solid #6c757d;
+      border-radius: 5px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .question-section h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .question-section p {
+      font-size: 18px;
+    }
+
+    .question-section div {
+      margin-bottom: 10px;
+    }
+
+    .question-section label {
+      margin-left: 10px;
+    }
+
+    .question-section input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .question-section input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+ 
+    .question-section input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .question-section input[type="radio"]:checked + label {
+      font-weight: bold;
+    }
+
+
+    .question-section .custom-form-check {
+      margin-bottom: 0;
+    }
+
+    .question-section .custom-form-check label {
+      margin-left: 5px;
+    }
+
+ 
+    #timer {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div>
+    <div>
+      <h2>Superhero Quiz</h2>
+    </div>
+  </div>
+
+  <div class="result-box d-none"> 
+    <div>
+      <p>You got <span>0%</span></p>
+    </div>
+  </div>
+  
+  <div class="quiz-container">
+    <div class="question-section">
+      <h2>Test Your Superhero Knowledge!</h2>
+
+      <div id="timer">Time left: <span id="time-left">30</span> seconds</div>
+
+      <form id="question-form">
+        <div>
+          <p>1. What is the real name of Batman?</p>
+          <div>
+            <input type="radio" name="q1" value="A" >
+            <label class="custom-form-check-label">Bruce Banner</label>
+          </div>
+          <div>
+            <input type="radio" name="q1" value="B">
+            <label>Bruce Wayne</label>
+          </div>
+        </div>
+        <div>
+          <p>2. What is Superman's weakness?</p>
+          <div>
+            <input type="radio" name="q2" value="A" >
+            <label class="custom-form-check-label">Kryptonite</label>
+          </div>
+          <div>
+            <input type="radio" name="q2" value="B">
+            <label>Lightsaber</label>
+          </div>
+        </div>
+        <div>
+          <p>3. Who is the alter ego of Spider-Man?</p>
+          <div>
+            <input type="radio" name="q3" value="A" >
+            <label class="custom-form-check-label">Peter Parker</label>
+          </div>
+          <div>
+            <input type="radio" name="q3" value="B">
+            <label>Bruce Banner</label>
+          </div>
+        </div>
+        <div>
+          <p>4. Which superhero is known as the "Man of Steel"?</p>
+          <div>
+            <input type="radio" name="q4" value="A" >
+            <label class="custom-form-check-label">Iron Man</label>
+          </div>
+          <div>
+            <input type="radio" name="q4" value="B">
+            <label class="custom-form-check-label">Super Man</label>
+          </div>
+        </div>
+        <div>
+          <input type="submit" class="btn btn-light"> 
+        </div>
+      </form>
+
+    </div>
+  </div>
+  
+  <script>
+    const answers = ['B', 'A', 'A', 'B'];
+    const form = document.querySelector('#question-form');
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const userAnswers = [form.q1.value, form.q2.value, form.q3.value, form.q4.value];
+      let score = 0;
+      userAnswers.forEach((answer, index) => {
+        if (answer === answers[index]) {
+          score += 25;
+        }
+      });
+  
+      const showResult = document.querySelector('.result-box');
+      showResult.querySelector('span').textContent = `${score}%`;
+      showResult.classList.remove('d-none');
+  
+     
+      showResult.scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+
+  
+    function startTimer(duration, display) {
+      let timer = duration, minutes, seconds;
+      const timerInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+          timer = 0; 
+          clearInterval(timerInterval); 
+          disableRadioButtons(); 
+          
+        }
+      }, 1000);
+    }
+
+    
+    function disableRadioButtons() {
+      const radioButtons = document.querySelectorAll('input[type="radio"]');
+      radioButtons.forEach(button => {
+        button.disabled = true;
+      });
+    }
+
+  
+    window.onload = function () {
+      const timeLimitPerQuestion = 30; 
+      const display = document.querySelector('#time-left');
+      startTimer(timeLimitPerQuestion, display);
+    };
+  </script>
+
+</body>
+</html>
