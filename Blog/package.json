@@ -1,0 +1,21 @@
+{
+  "name": "jms",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "core-js": "^3.37.0",
+    "firebase": "^8.10.1",
+    "json-server": "^1.0.0-alpha.23",
+    "vue": "^3.4.26",
+    "vue-router": "^4.3.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-service": "~5.0.0"
+  }
+}
